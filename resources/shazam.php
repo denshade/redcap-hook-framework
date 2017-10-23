@@ -3,7 +3,7 @@
 
   This is a hook utility function that allows the rearrangement of input elements on a page, for example in a html table of a descriptive field.
 
-  Currently, each elemnt you wish to pipe a field into should be
+  Currently, each element you wish to pipe a field into should be
 
   <span class='shazam'>field_name</span> will move the field_name input into this span
   <span class='shazam'>field_name:label</span> will just copy the label for the field called field_name and not the actual inputs.
@@ -107,7 +107,7 @@ if (!isset($hook_functions[$term])) {
             // Remove the br's that REDCap inserts before the table
             $(t).siblings('br').remove();
 
-            // Go through all elements for class .shazam for replacments
+            // Go through all elements for class .shazam for replacements
             $('td.labelrc .shazam', tr).each(function () {
                 var nodeValue = trim($(this).text());
                 var matches = nodeValue.split(':');
@@ -129,7 +129,7 @@ if (!isset($hook_functions[$term])) {
                     } else {
                         var real_data = $("td.data", $(real_tr));
                         if (!$(real_data).size())
-                            real_data = $("td:last", $(real_tr)); // changed to last to handle left alignment
+                            real_data = $("td:first", $(real_tr));
                         //var trInputs = $(":input", $(real_tr)).parentsUntil('td.data');
                         if ($(real_data).size()) {
                             var trInputs = $("input[type!='hidden']", $(real_data)).each(function () {
@@ -153,7 +153,7 @@ if (!isset($hook_functions[$term])) {
                             //console.log (r);	 	//.css('text-align','left');
 
                             // Move it to the td cell
-                            $(this).html($(real_data).children());
+                            $(this).html($(real_data).children(':not(table)'));
                             if ($(this).find(".rc-autocomplete").length === 0 && $(this).find(".note").length === 0) {
                                 $(this).append('<br>');
                             }
