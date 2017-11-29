@@ -154,11 +154,13 @@ if (!isset($hook_functions[$term])) {
 
                             // Move it to the td cell
                             $(this).html($(real_data).children(':not(table)'));
-                            if ($(this).find(".rc-autocomplete").length === 0 && $(this).find(".note").length === 0) {
+                            if ($(this).find(".rc-autocomplete").length === 0 && $(this).find(".note").length === 0 && $(this).find("div").length === 0) {
                                 $(this).append('<br>');
                             }
-                            $(this).append($(real_tr).find("a").parents().html().replace('<br>', ''));
-                            
+                            if ($(real_tr).find("a").length != 0) {
+                                $(this).append($(real_tr).find("a").parent().html().replace('<br>', ''));
+                            }
+
                             $(this).parents("tr").css({"vertical-align": "top"});
 
                             // Hide the source TRs. (two methods here)
